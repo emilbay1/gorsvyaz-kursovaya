@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ГорСвязь — Городские телефонные службы</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-icon">📞</span>
+        <span class="logo-text">ГорСвязь</span>
+      </div>
+      <nav>
+        <a href="index.html" class="active">Главная</a>
+        <a href="directory.html">Справочник</a>
+        <a href="news.html">Новости</a>
+        <a href="contacts.html">Контакты</a>
+      </nav>
+      <button class="btn-primary" onclick="location.href='directory.html'">Найти номер</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Онлайновая информационная система городских телефонных служб</h1>
+      <p>Быстрый доступ к справочникам, актуальным номерам и информации о городских службах Баку</p>
+      <div class="hero-search">
+        <input type="text" id="heroSearch" placeholder="Введите название службы или номер...">
+        <button onclick="heroSearchFn()">Поиск</button>
+      </div>
+      <div id="heroResult" class="hero-result"></div>
+    </div>
+  </section>
+
+  <section class="services-section">
+    <div class="container">
+      <h2 class="section-title">Основные службы</h2>
+      <div class="services-grid">
+        <div class="service-card" onclick="location.href='directory.html?cat=emergency'">
+          <div class="service-icon emergency">🚨</div>
+          <h3>Экстренные службы</h3>
+          <p>Скорая помощь, пожарная охрана, полиция и другие экстренные номера</p>
+          <span class="service-link">Перейти →</span>
+        </div>
+        <div class="service-card" onclick="location.href='directory.html?cat=utility'">
+          <div class="service-icon utility">🔧</div>
+          <h3>Коммунальные службы</h3>
+          <p>Газ, вода, электричество — аварийные и диспетчерские номера</p>
+          <span class="service-link">Перейти →</span>
+        </div>
+        <div class="service-card" onclick="location.href='directory.html?cat=gov'">
+          <div class="service-icon gov">🏛️</div>
+          <h3>Государственные органы</h3>
+          <p>Городская администрация, муниципальные службы и ведомства</p>
+          <span class="service-link">Перейти →</span>
+        </div>
+        <div class="service-card" onclick="location.href='directory.html?cat=medical'">
+          <div class="service-icon medical">🏥</div>
+          <h3>Медицинские учреждения</h3>
+          <p>Поликлиники, больницы, аптеки и медицинские центры города</p>
+          <span class="service-link">Перейти →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quick-numbers">
+    <div class="container">
+      <h2 class="section-title">Быстрый доступ</h2>
+      <div class="numbers-grid">
+        <div class="number-item">
+          <span class="num">103</span>
+          <span class="num-label">Скорая помощь</span>
+        </div>
+        <div class="number-item">
+          <span class="num">101</span>
+          <span class="num-label">Пожарная служба</span>
+        </div>
+        <div class="number-item">
+          <span class="num">102</span>
+          <span class="num-label">Полиция</span>
+        </div>
+        <div class="number-item">
+          <span class="num">104</span>
+          <span class="num-label">Газовая служба</span>
+        </div>
+        <div class="number-item">
+          <span class="num">105</span>
+          <span class="num-label">Аварийная электро</span>
+        </div>
+        <div class="number-item">
+          <span class="num">106</span>
+          <span class="num-label">Аварийная вода</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="news-preview">
+    <div class="container">
+      <div class="section-header-row">
+        <h2 class="section-title" style="margin-bottom:0">Последние новости</h2>
+        <a href="news.html" class="see-all">Все новости →</a>
+      </div>
+      <div class="news-grid">
+        <div class="news-card">
+          <span class="news-date">10 мая 2026</span>
+          <h4>Обновление номеров диспетчерских служб Баку</h4>
+          <p>В связи с модернизацией телефонной сети ряд номеров городских служб изменён. Проверьте актуальные данные в справочнике.</p>
+        </div>
+        <div class="news-card">
+          <span class="news-date">5 мая 2026</span>
+          <h4>Новая горячая линия по коммунальным вопросам</h4>
+          <p>Запущена единая горячая линия для обращений по вопросам коммунального хозяйства — 195.</p>
+        </div>
+        <div class="news-card">
+          <span class="news-date">28 апреля 2026</span>
+          <h4>График профилактических работ в апреле–мае</h4>
+          <p>Публикуем расписание плановых отключений воды и электроэнергии в районах города.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <div class="logo"><span class="logo-icon">📞</span><span class="logo-text">ГорСвязь</span></div>
+        <p>Информационная система городских телефонных служб г. Баку</p>
+      </div>
+      <div class="footer-col">
+        <h5>Разделы</h5>
+        <a href="index.html">Главная</a>
+        <a href="directory.html">Справочник</a>
+        <a href="news.html">Новости</a>
+        <a href="contacts.html">Контакты</a>
+      </div>
+      <div class="footer-col">
+        <h5>Экстренные номера</h5>
+        <span>101 — Пожарная служба</span>
+        <span>102 — Полиция</span>
+        <span>103 — Скорая помощь</span>
+        <span>104 — Газ</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">© 2026 ГорСвязь. Курсовая работа.</div>
+    </div>
+  </footer>
+
+  <script>
+    const allServices = [
+      { name: "Скорая помощь", num: "103", cat: "emergency" },
+      { name: "Пожарная служба", num: "101", cat: "emergency" },
+      { name: "Полиция", num: "102", cat: "emergency" },
+      { name: "Газовая аварийная", num: "104", cat: "utility" },
+      { name: "Электроаварийная", num: "105", cat: "utility" },
+      { name: "Аварийная водоснабжение", num: "106", cat: "utility" },
+      { name: "Городская администрация", num: "(012) 498-00-00", cat: "gov" },
+      { name: "Горячая линия ЖКХ", num: "195", cat: "utility" },
+    ];
+    function heroSearchFn() {
+      const q = document.getElementById('heroSearch').value.trim().toLowerCase();
+      const res = document.getElementById('heroResult');
+      if (!q) { res.innerHTML = ''; return; }
+      const found = allServices.filter(s => s.name.toLowerCase().includes(q) || s.num.includes(q));
+      if (found.length === 0) {
+        res.innerHTML = '<p>Ничего не найдено. <a href="directory.html">Открыть полный справочник</a></p>';
+      } else {
+        res.innerHTML = found.map(s => `<div class="result-item"><b>${s.name}</b> — <span>${s.num}</span></div>`).join('');
+      }
+    }
+    document.getElementById('heroSearch').addEventListener('keydown', e => { if (e.key === 'Enter') heroSearchFn(); });
+  </script>
+</body>
+</html>

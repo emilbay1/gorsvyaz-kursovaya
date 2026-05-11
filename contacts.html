@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Контакты — ГорСвязь</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-icon">📞</span>
+        <span class="logo-text">ГорСвязь</span>
+      </div>
+      <nav>
+        <a href="index.html">Главная</a>
+        <a href="directory.html">Справочник</a>
+        <a href="news.html">Новости</a>
+        <a href="contacts.html" class="active">Контакты</a>
+      </nav>
+      <button class="btn-primary" onclick="location.href='directory.html'">Найти номер</button>
+    </div>
+  </header>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>Контакты</h1>
+      <p>Свяжитесь с нами или оставьте обращение</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="contacts-grid">
+      <div>
+        <div class="contact-card" style="margin-bottom:20px">
+          <h3>📍 Адрес и режим работы</h3>
+          <div class="contact-row">
+            <span class="icon">🏢</span>
+            <div class="info">
+              <strong>Адрес</strong>
+              <span>г. Баку, ул. Ататюрка, д. 12, каб. 305</span>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="icon">🕘</span>
+            <div class="info">
+              <strong>Режим работы</strong>
+              <span>Пн–Пт: 09:00–18:00</span>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="icon">📞</span>
+            <div class="info">
+              <strong>Телефон</strong>
+              <span>(012) 498-55-00</span>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="icon">✉️</span>
+            <div class="info">
+              <strong>Email</strong>
+              <span>info@gorsvyaz.az</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <h3>🚨 Экстренные номера</h3>
+          <div class="contact-row">
+            <span class="icon">🔴</span>
+            <div class="info"><strong>Скорая помощь</strong><span>103</span></div>
+          </div>
+          <div class="contact-row">
+            <span class="icon">🔴</span>
+            <div class="info"><strong>Пожарная служба</strong><span>101</span></div>
+          </div>
+          <div class="contact-row">
+            <span class="icon">🔴</span>
+            <div class="info"><strong>Полиция</strong><span>102</span></div>
+          </div>
+          <div class="contact-row">
+            <span class="icon">🔴</span>
+            <div class="info"><strong>Служба спасения</strong><span>112</span></div>
+          </div>
+          <div class="contact-row">
+            <span class="icon">🔴</span>
+            <div class="info"><strong>Газовая аварийная</strong><span>104</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="feedback-form">
+          <h3>Форма обратной связи</h3>
+          <div class="form-group">
+            <label>Ваше имя</label>
+            <input type="text" id="fname" placeholder="Введите ваше имя">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="femail" placeholder="example@mail.com">
+          </div>
+          <div class="form-group">
+            <label>Тема обращения</label>
+            <select id="fsubject">
+              <option value="">Выберите тему...</option>
+              <option>Добавление нового номера</option>
+              <option>Исправление ошибки в справочнике</option>
+              <option>Технические вопросы</option>
+              <option>Другое</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Сообщение</label>
+            <textarea id="fmessage" placeholder="Опишите ваш вопрос или предложение..."></textarea>
+          </div>
+          <button class="btn-submit" onclick="submitForm()">Отправить обращение</button>
+          <div class="form-success" id="formSuccess">✅ Спасибо! Ваше обращение принято. Мы ответим в течение 2 рабочих дней.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <div class="logo"><span class="logo-icon">📞</span><span class="logo-text">ГорСвязь</span></div>
+        <p>Информационная система городских телефонных служб г. Баку</p>
+      </div>
+      <div class="footer-col">
+        <h5>Разделы</h5>
+        <a href="index.html">Главная</a>
+        <a href="directory.html">Справочник</a>
+        <a href="news.html">Новости</a>
+        <a href="contacts.html">Контакты</a>
+      </div>
+      <div class="footer-col">
+        <h5>Экстренные номера</h5>
+        <span>101 — Пожарная служба</span>
+        <span>102 — Полиция</span>
+        <span>103 — Скорая помощь</span>
+        <span>104 — Газ</span>
+      </div>
+    </div>
+    <div class="footer-bottom"><div class="container">© 2026 ГорСвязь. Курсовая работа.</div></div>
+  </footer>
+
+  <script>
+    function submitForm() {
+      const name = document.getElementById('fname').value.trim();
+      const email = document.getElementById('femail').value.trim();
+      const subject = document.getElementById('fsubject').value;
+      const msg = document.getElementById('fmessage').value.trim();
+      if (!name || !email || !subject || !msg) {
+        alert('Пожалуйста, заполните все поля.');
+        return;
+      }
+      document.getElementById('formSuccess').style.display = 'block';
+      document.getElementById('fname').value = '';
+      document.getElementById('femail').value = '';
+      document.getElementById('fsubject').value = '';
+      document.getElementById('fmessage').value = '';
+    }
+  </script>
+</body>
+</html>

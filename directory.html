@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Справочник — ГорСвязь</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-icon">📞</span>
+        <span class="logo-text">ГорСвязь</span>
+      </div>
+      <nav>
+        <a href="index.html">Главная</a>
+        <a href="directory.html" class="active">Справочник</a>
+        <a href="news.html">Новости</a>
+        <a href="contacts.html">Контакты</a>
+      </nav>
+      <button class="btn-primary" onclick="location.href='directory.html'">Найти номер</button>
+    </div>
+  </header>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>Справочник городских служб</h1>
+      <p>Полный список телефонных номеров городских служб г. Баку</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="dir-layout">
+      <aside class="sidebar">
+        <h3>Категории</h3>
+        <button class="cat-btn active" data-cat="all">🔍 Все службы</button>
+        <button class="cat-btn" data-cat="emergency">🚨 Экстренные</button>
+        <button class="cat-btn" data-cat="utility">🔧 Коммунальные</button>
+        <button class="cat-btn" data-cat="gov">🏛️ Государственные</button>
+        <button class="cat-btn" data-cat="medical">🏥 Медицинские</button>
+      </aside>
+
+      <main>
+        <div class="search-bar">
+          <input type="text" id="dirSearch" placeholder="Поиск по названию или номеру...">
+          <button onclick="filterTable()">Найти</button>
+        </div>
+        <table class="dir-table" id="dirTable">
+          <thead>
+            <tr>
+              <th>Название службы</th>
+              <th>Телефон</th>
+              <th>Категория</th>
+              <th>Режим работы</th>
+            </tr>
+          </thead>
+          <tbody id="dirBody">
+          </tbody>
+        </table>
+        <p id="noResult" style="display:none; padding:20px; color:#888;">Ничего не найдено.</p>
+      </main>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <div class="logo"><span class="logo-icon">📞</span><span class="logo-text">ГорСвязь</span></div>
+        <p>Информационная система городских телефонных служб г. Баку</p>
+      </div>
+      <div class="footer-col">
+        <h5>Разделы</h5>
+        <a href="index.html">Главная</a>
+        <a href="directory.html">Справочник</a>
+        <a href="news.html">Новости</a>
+        <a href="contacts.html">Контакты</a>
+      </div>
+      <div class="footer-col">
+        <h5>Экстренные номера</h5>
+        <span>101 — Пожарная служба</span>
+        <span>102 — Полиция</span>
+        <span>103 — Скорая помощь</span>
+        <span>104 — Газ</span>
+      </div>
+    </div>
+    <div class="footer-bottom"><div class="container">© 2026 ГорСвязь. Курсовая работа.</div></div>
+  </footer>
+
+  <script>
+    const services = [
+      { name: "Скорая помощь", phone: "103", cat: "emergency", hours: "Круглосуточно" },
+      { name: "Пожарная служба", phone: "101", cat: "emergency", hours: "Круглосуточно" },
+      { name: "Полиция", phone: "102", cat: "emergency", hours: "Круглосуточно" },
+      { name: "Служба спасения", phone: "112", cat: "emergency", hours: "Круглосуточно" },
+      { name: "Антитеррористический центр", phone: "113", cat: "emergency", hours: "Круглосуточно" },
+      { name: "Газовая аварийная служба", phone: "104", cat: "utility", hours: "Круглосуточно" },
+      { name: "Аварийная электрослужба", phone: "105", cat: "utility", hours: "Круглосуточно" },
+      { name: "Аварийная водоснабжение", phone: "106", cat: "utility", hours: "Круглосуточно" },
+      { name: "Горячая линия ЖКХ", phone: "195", cat: "utility", hours: "08:00–20:00" },
+      { name: "Единый диспетчерский центр", phone: "(012) 562-00-00", cat: "utility", hours: "Круглосуточно" },
+      { name: "Городская исполнительная власть Баку", phone: "(012) 498-00-00", cat: "gov", hours: "09:00–18:00" },
+      { name: "Государственная налоговая служба", phone: "195", cat: "gov", hours: "09:00–18:00" },
+      { name: "Главное управление полиции Баку", phone: "(012) 590-80-90", cat: "gov", hours: "Круглосуточно" },
+      { name: "Прокуратура г. Баку", phone: "(012) 492-46-46", cat: "gov", hours: "09:00–18:00" },
+      { name: "Государственная миграционная служба", phone: "(012) 919", cat: "gov", hours: "09:00–17:00" },
+      { name: "Республиканская больница", phone: "(012) 440-00-00", cat: "medical", hours: "Круглосуточно" },
+      { name: "Скорая стоматологическая помощь", phone: "(012) 562-11-11", cat: "medical", hours: "08:00–22:00" },
+      { name: "Центр психического здоровья", phone: "(012) 444-00-00", cat: "medical", hours: "Круглосуточно" },
+      { name: "Детская городская больница", phone: "(012) 440-22-00", cat: "medical", hours: "Круглосуточно" },
+      { name: "Справочная аптечная служба", phone: "175", cat: "medical", hours: "08:00–22:00" },
+    ];
+
+    const catNames = { emergency: "Экстренные", utility: "Коммунальные", gov: "Государственные", medical: "Медицинские" };
+    const catClass = { emergency: "badge-emergency", utility: "badge-utility", gov: "badge-gov", medical: "badge-medical" };
+
+    let currentCat = 'all';
+
+    function renderTable(data) {
+      const body = document.getElementById('dirBody');
+      const noRes = document.getElementById('noResult');
+      if (data.length === 0) {
+        body.innerHTML = '';
+        noRes.style.display = 'block';
+      } else {
+        noRes.style.display = 'none';
+        body.innerHTML = data.map(s => `
+          <tr>
+            <td><b>${s.name}</b></td>
+            <td><b style="color:#1a4f8a">${s.phone}</b></td>
+            <td><span class="badge ${catClass[s.cat]}">${catNames[s.cat]}</span></td>
+            <td>${s.hours}</td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    function filterTable() {
+      const q = document.getElementById('dirSearch').value.trim().toLowerCase();
+      let data = currentCat === 'all' ? services : services.filter(s => s.cat === currentCat);
+      if (q) data = data.filter(s => s.name.toLowerCase().includes(q) || s.phone.includes(q));
+      renderTable(data);
+    }
+
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentCat = this.dataset.cat;
+        filterTable();
+      });
+    });
+
+    document.getElementById('dirSearch').addEventListener('keydown', e => { if (e.key === 'Enter') filterTable(); });
+
+    // Check URL param for category
+    const urlParams = new URLSearchParams(window.location.search);
+    const cat = urlParams.get('cat');
+    if (cat) {
+      currentCat = cat;
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      const targetBtn = document.querySelector(`.cat-btn[data-cat="${cat}"]`);
+      if (targetBtn) targetBtn.classList.add('active');
+    }
+
+    renderTable(currentCat === 'all' ? services : services.filter(s => s.cat === currentCat));
+  </script>
+</body>
+</html>
